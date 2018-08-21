@@ -486,7 +486,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
     obj->data.i = atoi(&arg[0]);
   }
   obj->callbacks.print = &print_voltage_v;
-    
+
 #endif /* __linux__ */
 
 #ifdef BUILD_WLAN
@@ -522,7 +522,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
     parse_net_stat_bar_arg(obj, arg, free_at_crash);
     obj->callbacks.barval = &wireless_link_barval;
 #endif /* BUILD_WLAN */
-    
+
 #ifndef __OpenBSD__
   END OBJ(acpifan, nullptr) obj->callbacks.print = &print_acpifan;
   END OBJ(battery, nullptr) char bat[64];
@@ -1694,6 +1694,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
       curl_parse_arg(obj, arg);
   obj->callbacks.print = &curl_print;
   obj->callbacks.free = &curl_obj_free;
+  END OBJ(github_notifications, 0) obj->callbacks.print = &print_github;
 #endif /* BUILD_CURL */
 #ifdef BUILD_RSS
   END OBJ_ARG(rss, 0,
